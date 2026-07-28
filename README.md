@@ -56,11 +56,30 @@ waybar &
 
 ---
 
+## Custom Scripts
+
+This configuration includes a few helper scripts located in the `scripts/` directory.
+
+| Script          | Description                                                     |
+| --------------- | --------------------------------------------------------------- |
+| `vpn-status.sh` | Displays the current VPN/WireGuard connection status in Waybar. |
+| `active-app.sh` | Shows the title or class of the currently focused application.  |
+
+Make sure the scripts are executable:
+
+```bash
+chmod +x ~/.config/waybar/scripts/*.sh
+```
+
+If you store the scripts somewhere else, update the paths in your Waybar configuration accordingly.
+
+---
+
 ## Notes
 
 * **JetBrains Mono Nerd Font is required** for the icons in this configuration.
 * If icons appear broken or missing, verify that the font is installed and selected in your Waybar CSS.
-* Some custom modules may require additional utilities depending on your setup.
+* Some custom modules rely on external utilities such as `hyprctl`, `jq`, and `ip`.
 
 ---
 
