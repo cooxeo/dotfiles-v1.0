@@ -1,0 +1,83 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 15px;
+  font-weight: 500;
+}
+
+window#waybar {
+  background: rgba(0, 0, 0, 0.8);
+  color: #eeeeee;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0px;
+}
+
+/* remove module boxes */
+
+#custom-logo {
+  padding: 0 5px;
+  margin-left: 4px;
+}
+#workspaces{
+  padding: 0 0px;
+}
+#window,
+#clock,
+#cpu,
+#temperature,
+#memory,
+#backlight,
+#pulseaudio,
+#network,
+#bluetooth,
+#battery,
+#custom-notification,
+#custom-active-app,
+#custom-vpn,
+#tray {
+  color: #aaaaaa;
+  background: transparent;
+  padding: 0 4px;
+}
+
+/* workspace */
+
+#workspaces button {
+  color: #666;
+  padding: 0 5px;
+  background: transparent;
+  border-radius: 0;
+  border: 0;
+}
+
+#workspaces button.active {
+  color: white;
+}
+
+/* window */
+
+#window {
+  color: #aaaaaa;
+}
+
+#bluetooth {
+  font-size: 16px;
+}
+
+#battery {
+  font-size: 14px;
+  margin-right: 4px;
+}
+
+/* tray */
+
+#tray {
+  padding-right: 12px;
+}
+
+/* tooltip */
+tooltip {
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid #333;
+  color: white;
+}
+

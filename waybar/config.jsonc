@@ -1,0 +1,147 @@
+{
+    "layer": "top",
+    "position": "top",
+
+    "height": 32,
+    "spacing": 4,
+
+    "modules-left": [
+        "custom/logo",
+        "custom/vpn",
+        "custom/active-app"
+    ],
+
+    "modules-center": [
+        "cpu",
+        "temperature",
+        "memory",
+        "hyprland/workspaces",
+        "clock"
+    ],
+
+    "modules-right": [
+        "network",
+        "bluetooth",
+        "backlight",
+        "pulseaudio",
+        "battery",
+        "tray",
+        "custom/notification"
+    ],
+
+    "custom/logo": {
+        "format": "󰣇",
+        "tooltip": false
+    },
+
+    "custom/active-app": {
+        "exec": "~/.config/scripts/active-app.sh",
+        "interval": 1,
+        "format": "{}",
+        "max-length": 20,
+        "tooltip": false
+    },
+
+    "custom/vpn": {
+        "exec": "~/.config/scripts/vpn-status.sh",
+        "return-type": "json",
+        "interval": 2,
+        "tooltip": true
+    },
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+
+    "clock": {
+        "format": "󰃭 {:%a %d %b  󰥔 %I:%M %p}",
+        "tooltip-format": "<span size='11000' font-family='DMMono-Regular'><tt>{calendar}</tt></span>",
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "months": "<span color='#777777'><b>{}</b></span>",
+                "weekdays": "<span color='#999999'>{}</span>",
+                "days": "<span color='#555555'>{}</span>",
+                "today": "<span color='#FFFFFF'><b>{}</b></span>"
+            }
+        },
+    },
+
+    "cpu": {
+        "interval": 5,
+        "format": " {usage}%"
+    },
+
+    "temperature": {
+        "thermal-zone": 0,
+        "critical-threshold": 80,
+        "format": " {temperatureC}°C",
+        "format-critical": " {temperatureC}°C"
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": "󰍛 {percentage}%"
+    },
+
+    "network": {
+        "interval": 5,
+        "format-wifi": "󰖩 {signalStrength}%",
+        "format-ethernet": "󰈀 LAN",
+        "format-disconnected": "󰖪 ",
+        "tooltip": true
+    },
+
+    "bluetooth": {
+        "format-on": "󰂯",
+        "format-connected": "󰂱",
+        "format-off": "󰂲",
+        "tooltip": true,
+        "on-click": "blueman-manager"
+    },
+
+    "backlight": {
+        "format": "󰃟 {percent}%"
+    },
+
+    "pulseaudio": {
+        "format": " {volume}%",
+        "format-muted": " ",
+        "scroll-step": 5,
+        "on-click": "pavucontrol"
+    },
+
+
+    "battery": {
+        "interval": 10,
+
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-full": " {capacity}%",
+
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+
+        "tooltip": true
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 4
+    }
+}
