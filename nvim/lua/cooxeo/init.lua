@@ -1,0 +1,6 @@
+require("cooxeo.options")
+require("cooxeo.theme")
+require("cooxeo.lazy")
+require("cooxeo.cmp")
+require("cooxeo.remaps")
+require("cooxeo.colors")

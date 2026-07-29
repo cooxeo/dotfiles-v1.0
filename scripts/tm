@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# # Starting directory for tmux sessions (not really used here, just for style)
+# local start_dir="${1:-$PWD}"
+
+# List tmux sessions
+sessions=$(tmux ls 2>/dev/null || echo "")
+[ -z "$sessions" ] && { echo "No tmux sessions found."; exit 0; }
+
+# Select session using skim, with margin (centered) and hidden preview
+selected=$(echo "$sessions" | sk --margin 10% --color="bw" --preview-window=hidden) || exit
+
+# Extract session name
+session=$(echo "$selected" | cut -d: -f1)
+[ -z "$session" ] && exit
+
+# Attach or switch safely
+if [ -n "$TMUX" ]; then
+    tmux switch-client -t "$session"
+else
+    tmux attach-session -t "$session"
+fi

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# check if file is provided
+if [ -z "$1" ]; then
+    echo "usage: g++ <source-file.cpp>"
+    exit 1
+fi
+
+file="$1"
+base="$(basename "${file%.*}")"
+
+# make sure clutter folder exists
+mkdir -p ~/cooxeo/code/clutters
+
+# compile into clutter and run
+/usr/bin/g++ "$file" -o ~/cooxeo/code/clutters/"$base" && ~/cooxeo/code/clutters/"$base"
+

@@ -1,0 +1,63 @@
+#!/bin/bash 
+# IPC socket for MPV control
+MPV_IPC="$HOME/.config/mpvsocket"
+rm -f "$MPV_IPC"
+
+if [ $# -eq 0 ]; then
+    echo "Usage:"
+    echo "  play <song>              # audio only"
+    echo "  play -l <song>           # loop audio"
+    echo "  play -v <song>           # video"
+    echo "  play -v -l <song>        # video looped"
+    echo "  play playlist            # play playlist"
+    echo "  play -v playlist         # video playlist"
+    echo "  play -l playlist         # loop audio playlist"
+    echo "  play -v -l playlist      # loop video playlist"
+    echo "  play -t N <song>         # play top N search results as a queue"
+    exit 1
+fi
+
+# Default options
+video="--no-video"
+loop=""
+cache="--no-cache"
+top=1
+
+# Parse flags
+while [[ "$1" == "-v" || "$1" == "-l" || "$1" == "-t" ]]; do
+    case "$1" in
+        -v) video="" ;;
+        -l) loop="--loop" ;;
+        -t)
+            shift
+            if [[ "$1" =~ ^[0-9]+$ ]]; then
+                top="$1"
+            else
+                echo "Error: -t requires a number"
+                exit 1
+            fi
+            ;;
+    esac
+    shift
+done
+
+# Remaining arguments
+query="$*"
+
+# playlist special case
+if [[ "$query" == "playlist" ]]; then
+    mpv \
+      --input-ipc-server="$MPV_IPC" \
+      --playlist="$HOME/Music/playlist.txt" \
+      $video $loop $cache
+    exit 0
+fi
+
+
+# YouTube search
+if [[ $top -eq 1 ]]; then
+    mpv --input-ipc-server="$MPV_IPC" $video $loop $cache "ytdl://ytsearch:$query"
+else
+    urls=$(yt-dlp --flat-playlist --get-id "ytsearch$top:$query" | sed "s_^_https://www.youtube.com/watch?v=_")
+    mpv --input-ipc-server="$MPV_IPC" $video $loop $cache $urls
+fi
